@@ -1,5 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
 
+Plug 'test/oliver-test'
+
 " Plug 'scrooloose/nerdtree'
 Plug 'kyazdani42/nvim-web-devicons' " for file icons
 Plug 'kyazdani42/nvim-tree.lua'
@@ -20,13 +22,22 @@ Plug 'quangnguyen30192/cmp-nvim-ultisnips'
 Plug 'maxmellon/vim-jsx-pretty'
 " Plug 'joshdick/onedark.vim'
 " Plug 'ayu-theme/ayu-vim'
-Plug 'morhetz/gruvbox'
+" Plug 'morhetz/gruvbox'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
+Plug 'EdenEast/nightfox.nvim'
+
 Plug 'mengelbrecht/lightline-bufferline'
 Plug 'liuchengxu/vista.vim'
 Plug 'udalov/kotlin-vim'
 Plug 'tpope/vim-surround'
 Plug 'vimwiki/vimwiki'
 "Plug 'easymotion/vim-easymotion'
+Plug 'ggandor/leap.nvim'
+Plug 'tpope/vim-repeat'
+Plug 'szw/vim-maximizer'
+Plug 'MattesGroeger/vim-bookmarks'
+Plug 'tom-anders/telescope-vim-bookmarks.nvim'
+Plug 'preservim/nerdcommenter'
 
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/nvim-cmp'
@@ -309,7 +320,7 @@ lua << EOF
     },
     view = {
       width = 30,
-      height = 30,
+      --height = 30,
       hide_root_folder = false,
       side = 'left',
       preserve_window_proportions = false,
@@ -456,13 +467,13 @@ lua << EOF
 
   -- Add additional capabilities supported by nvim-cmp
   local capabilities = vim.lsp.protocol.make_client_capabilities()
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
   local lspconfig = require('lspconfig')
 
   -- Use a loop to conveniently call 'setup' on multiple servers and
   -- map buffer local keybindings when the language server attaches
-  local servers = { 'gopls', 'sumneko_lua', 'rls', 'tsserver'}
+  local servers = { 'gopls', 'sumneko_lua', 'rls', 'tsserver', 'vimls' }
   for _, lsp in pairs(servers) do
     lspconfig[lsp].setup {
       on_attach = on_attach,
@@ -665,6 +676,9 @@ lua << EOF
       })
   })
 
+  require('leap').add_default_mappings()
+  require('telescope').load_extension('vim_bookmarks')
+
 --  local parser_config = require "nvim-treesitter.parsers".get_parser_configs()
 --  parser_config.solidity = {
 --    install_info = {
@@ -677,15 +691,26 @@ lua << EOF
 --    },
 --    filetype = "solidity", -- if filetype does not match the parser name
 --  }
+
+  -- Getting used to `d` shouldn't take long - after all, it is more comfortable
+  -- than `x`, and even has a better mnemonic.
+  -- If you still desperately want your old `x` back, then just delete these
+  -- mappings set by Leap:
+  vim.keymap.del({'x', 'o'}, 'x')
+  vim.keymap.del({'x', 'o'}, 'X')
+  -- To set alternative keys for "exclusive" selection:
+  --vim.keymap.set({'x', 'o'}, <some-other-key>, '<Plug>(leap-forward-till)')
+  --vim.keymap.set({'x', 'o'}, <some-other-key>, '<Plug>(leap-backward-till)')
 EOF
 
 " [End lsp.config]
 
-set nu
+set number
+" set relativenumber
 set noshowmode
 
 let g:lightline = {
-      \ 'colorscheme': 'landscape',
+      \ 'colorscheme': 'nightfox',
       \ 'active': {
       \   'left': [ [ 'mode', 'paste' ],
       \             [ 'gitbranch', 'readonly', 'filename', 'modified', 'method' ] ]
@@ -737,6 +762,7 @@ nnoremap <leader>ff <cmd>Telescope find_files<cr>
 nnoremap <leader>fg <cmd>Telescope live_grep<cr>
 nnoremap <leader>fb <cmd>Telescope buffers<cr>
 nnoremap <leader>fh <cmd>Telescope command_history<cr>
+nnoremap <leader>fm <cmd>Telescope vim_bookmarks all<cr>
 
 " map <c-p> :Files<CR>
 nmap <c-p> <cmd>Telescope find_files<cr>
@@ -745,6 +771,7 @@ nmap <silent> gr <cmd>Telescope lsp_references<cr>
 nmap <silent> gs <cmd>Telescope lsp_dynamic_workspace_symbols<cr>
 nmap <silent> gt <cmd>Telescope lsp_dynamic_workspace_symbols symbols=struct<cr>
 nmap <silent> gi <cmd>Telescope lsp_implementations<cr>
+nmap <silent> gj <cmd>Telescope jumplist<cr>
 
 set noswapfile
 
@@ -778,7 +805,9 @@ set termguicolors
 " let ayucolor="dark"
 " colorscheme ayu
 " autocmd vimenter * colorscheme gruvbox
-colorscheme gruvbox
+" colorscheme gruvbox
+" colorscheme tokyonight-moon
+colorscheme nightfox
 
 set noswapfile
 
@@ -865,3 +894,30 @@ nnoremap <leader>gc :GoDebugContinue<CR>
 nnoremap <leader>gn :GoDebugNext<CR>
 nnoremap <leader>gp :GoDebugStep<CR>
 nnoremap <leader>gq :GoDebugStop<CR>
+
+nnoremap <leader>wm :MaximizerToggle<CR>
+
+let g:bookmark_save_per_working_dir = 1
+
+" Create default mappings
+let g:NERDCreateDefaultMappings = 1
+" Add spaces after comment delimiters by default
+let g:NERDSpaceDelims = 1
+" Use compact syntax for prettified multi-line comments
+let g:NERDCompactSexyComs = 1
+" Align line-wise comment delimiters flush left instead of following code indentation
+let g:NERDDefaultAlign = 'left'
+" Set a language to use its alternate delimiters by default
+let g:NERDAltDelims_java = 1
+" Add your own custom formats or override the defaults
+let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+" Allow commenting and inverting empty lines (useful when commenting a region)
+let g:NERDCommentEmptyLines = 1
+" Enable trimming of trailing whitespace when uncommenting
+let g:NERDTrimTrailingWhitespace = 1
+" Enable NERDCommenterToggle to check all selected lines is commented or not 
+let g:NERDToggleCheckAllLines = 1
+
+map <C-_> <plug>NERDCommenterToggle
+
+" call go#lsp#Restart().
