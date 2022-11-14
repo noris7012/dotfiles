@@ -1,3 +1,5 @@
+local vim = vim
+
 local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.config/nvim/plugged')
@@ -93,7 +95,7 @@ opt.softtabstop = 4
 opt.shiftwidth = 4
 --set expandtab
 
-vim.api.nvim_command('command -nargs=* Glg Git! log --graph --pretty=format:\'\\%h - (\\%ad)\\%d \\%s <\\%an>\' --abbrev-commit --date=local <args>')
+vim.api.nvim_command('command -nargs=* Glg Git log --graph --oneline --remotes=origin --decorate <args>')
 
 opt.compatible = false
 
@@ -105,8 +107,6 @@ local keymap = vim.keymap
 keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>')
 keymap.set('n', '<leader>r', ':NvimTreeRefresh<CR>:TagbarForceUpdate<CR>')
 keymap.set('n', '<leader>n', ':NvimTreeFindFile<CR>')
-
-vim.api.nvim_command('highlight NvimTreeFolderIcon guibg=blue')
 
 require'nvim-tree'.setup {
   disable_netrw        = false,
@@ -267,7 +267,7 @@ require'nvim-web-devicons'.setup {
 --let g:UltiSnipsSnippetDirectories = ['~/.vim/UltiSnips']
 --let g:UltiSnipsSnippetDirectories = ['UltiSnips']
 vim.g.UltiSnipsEditSplit = 'vertical'
-vim.g.UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'      
+vim.g.UltiSnipsExpandTrigger = '<Plug>(ultisnips_expand)'
 vim.g.UltiSnipsJumpForwardTrigger = '<Plug>(ultisnips_jump_forward)'
 vim.g.UltiSnipsJumpBackwardTrigger = '<Plug>(ultisnips_jump_backward)'
 vim.g.UltiSnipsListSnippets = '<c-x><c-s>'
@@ -601,7 +601,7 @@ keymap.set('n', '<leader>fm', '<cmd>Telescope vim_bookmarks all<cr>')
 
 --map <c-p> :Files<CR>
 keymap.set('n', '<c-p>', '<cmd>Telescope find_files<cr>')
-keymap.set('n', '<c-]>', '<cmd>Telescope lsp_definitions<cr>', { silent = true })
+keymap.set('n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<cr>')
 keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>', { silent = true })
 keymap.set('n', 'gs', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', { silent = true })
 keymap.set('n', 'gt', '<cmd>Telescope lsp_dynamic_workspace_symbols symbols=struct<cr>', { silent = true })
@@ -704,7 +704,9 @@ vim.g.NERDCustomDelimiters = { c = { left = '/**', right = '*/' } }
 vim.g.NERDCommentEmptyLines  = true
 --Enable trimming of trailing whitespace when uncommenting
 vim.g.NERDTrimTrailingWhitespace  = true
---Enable NERDCommenterToggle to check all selected lines is commented or not 
+--Enable NERDCommenterToggle to check all selected lines is commented or not
 vim.g.NERDToggleCheckAllLines  = true
 
 keymap.set('', '<C-_>', '<plug>NERDCommenterToggle')
+
+vim.g.go_def_mapping_enabled = false
