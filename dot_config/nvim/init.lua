@@ -43,7 +43,7 @@ Plug 'ggandor/leap.nvim'
 Plug 'tpope/vim-repeat'
 Plug 'szw/vim-maximizer'
 Plug 'MattesGroeger/vim-bookmarks'
-Plug 'tom-anders/telescope-vim-bookmarks.nvim'
+-- Plug 'tom-anders/telescope-vim-bookmarks.nvim'
 Plug 'preservim/nerdcommenter'
 
 Plug 'hrsh7th/cmp-nvim-lsp'
@@ -70,7 +70,8 @@ opt.number = true
 opt.relativenumber = true
 opt.showmode = false
 
-opt.clipboard = 'unnamed'
+opt.clipboard = 'unnamedplus'
+vim.api.nvim_command('set clipboard+=unnamedplus')
 
 opt.rtp:append('/opt/homebrew/opt/fzf')
 
@@ -518,7 +519,7 @@ cmp.setup.cmdline(':', {
 })
 
 require('leap').add_default_mappings()
-require('telescope').load_extension('vim_bookmarks')
+-- require('telescope').load_extension('vim_bookmarks')
 require('octo').setup({ })
 
 --local parser_config = require "nvim-treesitter.parsers".get_parser_configs()

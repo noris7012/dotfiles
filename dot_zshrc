@@ -112,8 +112,6 @@ export NVM_DIR="$HOME/.nvm"
 
 eval "$(zoxide init zsh)"
 
-export PATH="$(pyenv root)/shims:$(go env GOPATH)/bin:/Users/oliver/.local/share/solana/install/active_release/bin:$PATH"
-
 export EDITOR='nvim'
 
 # bun completions
@@ -124,4 +122,6 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
 export PATH="/opt/homebrew/bin:$PATH"
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+. /opt/asdf-vm/asdf.sh
+
+export PATH="$(go env GOPATH)/bin:/Users/oliver/.local/share/solana/install/active_release/bin:$PATH"
