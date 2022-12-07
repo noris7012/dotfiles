@@ -103,8 +103,9 @@ source $ZSH/oh-my-zsh.sh
 alias tn="tmux new -s"
 alias ta="tmux attach -t"
 alias v="nvim"
+alias g="nvim -c \"G | only\""
 
-export TMUX_PLUGIN_MANAGER_PATH="/Users/oliver/.tmux/plugins"
+export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "/opt/homebrew/opt/nvm/nvm.sh" ] && \. "/opt/homebrew/opt/nvm/nvm.sh"  # This loads nvm

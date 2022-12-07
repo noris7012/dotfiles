@@ -62,6 +62,8 @@ Plug 'tomlion/vim-solidity'
 Plug('fatih/vim-go', { ['do']= ':GoUpdateBinaries' })
 Plug 'elixir-editors/vim-elixir'
 
+Plug 'wellle/context.vim'
+
 vim.call('plug#end')
 
 
@@ -72,6 +74,7 @@ opt.showmode = false
 
 opt.clipboard = 'unnamedplus'
 vim.api.nvim_command('set clipboard+=unnamedplus')
+--vim.api.nvim_command('set foldmethod=syntax')
 
 opt.rtp:append('/opt/homebrew/opt/fzf')
 
@@ -96,7 +99,8 @@ opt.softtabstop = 4
 opt.shiftwidth = 4
 --set expandtab
 
-vim.api.nvim_command('command -nargs=* Glg Git log --graph --oneline --remotes=origin --decorate <args>')
+vim.api.nvim_command('command -nargs=* Glg Git log --graph --oneline --decorate <args>')
+vim.api.nvim_command('command -nargs=* Gla Git log --graph --oneline --decorate --all <args>')
 
 opt.compatible = false
 

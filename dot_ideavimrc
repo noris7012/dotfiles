@@ -1,1 +1,15 @@
+Plug 'preservim/nerdtree'
+
 map gr <Action>(FindUsages)
+map <C-p> <Action>(GotoFile)
+map <S-A-[> <Action>(PreviousTab)
+map <S-A-]> <Action>(NextTab)
+map <Leader>rn <Action>(RenameElement)
+map <Leader>fg <Action>(FindInPath)
+
+map <C-n> :NERDTreeToggle<CR>
+
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+nnoremap <C-H> <C-W><C-H>
