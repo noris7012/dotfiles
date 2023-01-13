@@ -1,2 +1,12 @@
 [mergetool]
 	keepBackup = false
+[user]
+	email = noris7012@gmail.com
+	name = noris7012
+[merge]
+	tool = nvimdiff
+[pull]
+	ff = only
+
+[url "ssh://git@github.com/"]
+	insteadOf = https://github.com/

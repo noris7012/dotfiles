@@ -75,6 +75,10 @@ opt.showmode = false
 opt.clipboard = 'unnamedplus'
 vim.api.nvim_command('set clipboard+=unnamedplus')
 --vim.api.nvim_command('set foldmethod=syntax')
+vim.api.nvim_command('set jumpoptions+=stack')
+-- the same: a-z,_,A-Z,0-9
+-- vim.api.nvim_command('set iskeyword=65-90,95,97-122,48-57')
+
 
 opt.rtp:append('/opt/homebrew/opt/fzf')
 
@@ -108,10 +112,20 @@ vim.api.nvim_command('filetype plugin on')
 vim.api.nvim_command('set grepprg=rg\\ --vimgrep\\ --no-heading\\ --smart-case')
 vim.api.nvim_command('set grepformat=%f:%l:%c:%m')
 
+vim.api.nvim_command('highlight DiffAdd guibg=DarkGreen')
+vim.api.nvim_command('highlight DiffDelete guibg=LightGray')
+vim.api.nvim_command('highlight DiffChange guibg=Purple')
+vim.api.nvim_command('highlight DiffText guibg=DarkRed')
+
 local keymap = vim.keymap
 keymap.set('n', '<C-n>', ':NvimTreeToggle<CR>')
 keymap.set('n', '<leader>r', ':NvimTreeRefresh<CR>:TagbarForceUpdate<CR>')
 keymap.set('n', '<leader>n', ':NvimTreeFindFile<CR>')
+
+-- turn a snake into a camel
+keymap.set('n', '<leader>+', ':s/\\%V_\\(.\\)/\\U\\1/g<CR>:nohlsearch<CR>')
+-- turn a camel into a snake
+keymap.set('n', '<leader>-', 's/\\%V\\(\\u\\)/_\\L\\1/g<CR>:nohlsearch<CR>')
 
 require'nvim-tree'.setup {
   disable_netrw        = false,
@@ -319,7 +333,7 @@ local lspconfig = require('lspconfig')
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'gopls', 'sumneko_lua', 'rls', 'tsserver', 'vimls' }
+local servers = { 'sumneko_lua', 'rls', 'tsserver', 'vimls', 'kotlin_language_server' }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -331,16 +345,29 @@ for _, lsp in pairs(servers) do
   }
 end
 
---lspconfig['gopls'].setup {
---  settings = {
---    gopls = {
---      buildFlags = {"-tags=wireinject"}
---    }
---  }
---}
+lspconfig['gopls'].setup {
+  on_attach = on_attach,
+  flags = {
+    -- This will be the default in neovim 0.7+
+    debounce_text_changes = 150,
+  },
+  capabilities = capabilities,
+  cmd = {"gopls", "--remote=auto"}
+}
 
 lspconfig['elixirls'].setup{
-  cmd = { "/Users/oliver/lsp/elixir-ls/language_server.sh" };
+  on_attach = on_attach,
+  flags = {
+    -- This will be the default in neovim 0.7+
+    debounce_text_changes = 150,
+  },
+  capabilities = capabilities,
+  cmd = { "/home/noris/Repository/elixir-ls/bin/language_server.sh" },
+  -- cmd = { "/home/noris/Repository/elixir-ls/bin/debugger.sh" }
+  elixirLS = {
+    dialyzerEnabled = false,
+    fetchDeps = false,
+  },
 }
 
 require("cmp_nvim_ultisnips").setup{}
@@ -604,10 +631,14 @@ keymap.set('n', '<leader>fb', '<cmd>Telescope buffers<cr>')
 keymap.set('n', '<leader>fh', '<cmd>Telescope command_history<cr>')
 keymap.set('n', '<leader>fm', '<cmd>Telescope vim_bookmarks all<cr>')
 
+
 --map <c-p> :Files<CR>
 keymap.set('n', '<c-p>', '<cmd>Telescope find_files<cr>')
-keymap.set('n', '<c-]>', '<cmd>lua vim.lsp.buf.definition()<cr>')
-keymap.set('n', 'gr', '<cmd>Telescope lsp_references<cr>', { silent = true })
+keymap.set('n', '<c-]>', vim.lsp.buf.definition)
+keymap.set('n', '<c-]>', '<c-]>zz')
+keymap.set('n', '<c-o>', '<c-o>zz')
+keymap.set('n', '<c-i>', '<c-i>zz')
+keymap.set('n', 'gr', '<cmd>Telescope lsp_references include_current_line=true<cr>', { silent = true })
 keymap.set('n', 'gs', '<cmd>Telescope lsp_dynamic_workspace_symbols<cr>', { silent = true })
 keymap.set('n', 'gt', '<cmd>Telescope lsp_dynamic_workspace_symbols symbols=struct<cr>', { silent = true })
 keymap.set('n', 'gi', '<cmd>Telescope lsp_implementations<cr>', { silent = true })
@@ -679,7 +710,9 @@ keymap.set('n', '<leader>ql', ':call ToggleLocationList()<CR>')
 keymap.set('n', '<leader>qo', ':copen<CR>')
 keymap.set('n', '<leader>qc', ':close<CR>')
 keymap.set('n', '<leader>qn', ':cnext<CR>')
+keymap.set('n', '<A-Space>', ':cnext<CR>zz')
 keymap.set('n', '<leader>qN', ':cprevious<CR>')
+keymap.set('n', '<C-Space>', ':cprevious<CR>zz')
 
 keymap.set('n', '<leader>gst', ':GoTestFunc<CR>')
 keymap.set('n', '<leader>gsd', ':execute \':GoDebugTest ./\' . expand("%:h") . \' -test.run=\' . go#util#TestName()<CR>')
@@ -715,3 +748,8 @@ vim.g.NERDToggleCheckAllLines  = true
 keymap.set('', '<C-_>', '<plug>NERDCommenterToggle')
 
 vim.g.go_def_mapping_enabled = false
+
+vim.api.nvim_command('imap <silent><script><expr> <C-T> copilot#Accept("\\<CR>")')
+vim.g.copilot_no_tab_map = true
+
+

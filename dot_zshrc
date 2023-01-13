@@ -104,6 +104,16 @@ alias tn="tmux new -s"
 alias ta="tmux attach -t"
 alias v="nvim"
 alias g="nvim -c \"G | only\""
+alias gla="nvim -c \"Gla | only\""
+
+function glg() {
+	if [ -n "$1" ]
+	then
+		nvim -c "Glg $1 | only"
+	else
+		nvim -c "Glg | only"
+	fi
+}
 
 export TMUX_PLUGIN_MANAGER_PATH="$HOME/.tmux/plugins"
 
@@ -126,3 +136,8 @@ export PATH="/opt/homebrew/bin:$PATH"
 . /opt/asdf-vm/asdf.sh
 
 export PATH="$(go env GOPATH)/bin:/Users/oliver/.local/share/solana/install/active_release/bin:$PATH"
+
+export MANPAGER='nvim +Man!'
+eval $(thefuck --alias)
+
+alias open="vivaldi-stable"
