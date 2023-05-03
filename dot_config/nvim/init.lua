@@ -4,65 +4,65 @@ local Plug = vim.fn['plug#']
 
 vim.call('plug#begin', '~/.config/nvim/plugged')
 
---Plug 'test/oliver-test'
+ --Plug 'test/oliver-test'
 
---Plug 'scrooloose/nerdtree'
-Plug 'nvim-tree/nvim-web-devicons' -- for file icons
-Plug 'nvim-tree/nvim-tree.lua'
-Plug 'junegunn/fzf.vim'
---Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'neovim/nvim-lspconfig'
-Plug 'christoomey/vim-tmux-navigator'
-Plug 'itchyny/lightline.vim'
-Plug 'itchyny/vim-gitbranch'
-Plug 'tpope/vim-fugitive'
-Plug 'junegunn/gv.vim'
-Plug 'nvim-lua/plenary.nvim'
-Plug 'nvim-telescope/telescope.nvim'
-Plug 'majutsushi/tagbar'
-Plug 'milkypostman/vim-togglelist'
-Plug 'sirver/ultisnips'
-Plug 'honza/vim-snippets'
-Plug 'quangnguyen30192/cmp-nvim-ultisnips'
-Plug 'pwntester/octo.nvim'
+ --Plug 'scrooloose/nerdtree'
+ Plug 'nvim-tree/nvim-web-devicons' -- for file icons
+ Plug 'nvim-tree/nvim-tree.lua'
+ Plug 'junegunn/fzf.vim'
+ --Plug 'neoclide/coc.nvim', {'branch': 'release'}
+ Plug 'neovim/nvim-lspconfig'
+ Plug 'christoomey/vim-tmux-navigator'
+ Plug 'itchyny/lightline.vim'
+ Plug 'itchyny/vim-gitbranch'
+ Plug 'tpope/vim-fugitive'
+ Plug 'junegunn/gv.vim'
+ Plug 'nvim-lua/plenary.nvim'
+ Plug 'nvim-telescope/telescope.nvim'
+ Plug 'majutsushi/tagbar'
+ Plug 'milkypostman/vim-togglelist'
+ Plug 'sirver/ultisnips'
+ Plug 'honza/vim-snippets'
+ Plug 'quangnguyen30192/cmp-nvim-ultisnips'
+ Plug 'pwntester/octo.nvim'
 
-Plug 'maxmellon/vim-jsx-pretty'
---Plug 'joshdick/onedark.vim'
---Plug 'ayu-theme/ayu-vim'
---Plug 'morhetz/gruvbox'
-Plug('folke/tokyonight.nvim', { branch = 'main' })
-Plug 'EdenEast/nightfox.nvim'
+ Plug 'maxmellon/vim-jsx-pretty'
+ --Plug 'joshdick/onedark.vim'
+ --Plug 'ayu-theme/ayu-vim'
+ --Plug 'morhetz/gruvbox'
+ Plug('folke/tokyonight.nvim', { branch = 'main' })
+ Plug 'EdenEast/nightfox.nvim'
 
-Plug 'mengelbrecht/lightline-bufferline'
-Plug 'liuchengxu/vista.vim'
-Plug 'udalov/kotlin-vim'
-Plug 'tpope/vim-surround'
-Plug 'vimwiki/vimwiki'
---Plug 'easymotion/vim-easymotion'
-Plug 'ggandor/leap.nvim'
-Plug 'tpope/vim-repeat'
-Plug 'szw/vim-maximizer'
-Plug 'MattesGroeger/vim-bookmarks'
--- Plug 'tom-anders/telescope-vim-bookmarks.nvim'
-Plug 'preservim/nerdcommenter'
+ Plug 'mengelbrecht/lightline-bufferline'
+ Plug 'liuchengxu/vista.vim'
+ Plug 'udalov/kotlin-vim'
+ Plug 'tpope/vim-surround'
+ Plug 'vimwiki/vimwiki'
+ --Plug 'easymotion/vim-easymotion'
+ Plug 'ggandor/leap.nvim'
+ Plug 'tpope/vim-repeat'
+ Plug 'szw/vim-maximizer'
+ -- Plug 'MattesGroeger/vim-bookmarks'
+ -- Plug 'tom-anders/telescope-vim-bookmarks.nvim'
+ Plug 'preservim/nerdcommenter'
 
-Plug 'hrsh7th/cmp-nvim-lsp'
-Plug 'hrsh7th/nvim-cmp'
-Plug 'hrsh7th/cmp-buffer'
-Plug 'hrsh7th/cmp-path'
-Plug 'hrsh7th/cmp-cmdline'
+ Plug 'hrsh7th/cmp-nvim-lsp'
+ Plug 'hrsh7th/nvim-cmp'
+ Plug 'hrsh7th/cmp-buffer'
+ Plug 'hrsh7th/cmp-path'
+ Plug 'hrsh7th/cmp-cmdline'
 
---Plug 'L3MON4D3/LuaSnip'
---Plug 'saadparwaiz1/cmp_luasnip'
+ --Plug 'L3MON4D3/LuaSnip'
+ --Plug 'saadparwaiz1/cmp_luasnip'
 
-Plug 'ray-x/lsp_signature.nvim'
+ Plug 'ray-x/lsp_signature.nvim'
 
---Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'tomlion/vim-solidity'
-Plug('fatih/vim-go', { ['do']= ':GoUpdateBinaries' })
-Plug 'elixir-editors/vim-elixir'
+ --Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+ Plug 'tomlion/vim-solidity'
+ Plug('fatih/vim-go', { ['do']= ':GoUpdateBinaries' })
+ Plug 'elixir-editors/vim-elixir'
 
-Plug 'wellle/context.vim'
+ Plug 'wellle/context.vim'
 
 vim.call('plug#end')
 
@@ -130,9 +130,9 @@ keymap.set('n', '<leader>-', 's/\\%V\\(\\u\\)/_\\L\\1/g<CR>:nohlsearch<CR>')
 require'nvim-tree'.setup {
   disable_netrw        = false,
   hijack_netrw         = true,
-  open_on_setup        = false,
-  ignore_buffer_on_setup = false,
-  ignore_ft_on_setup   = {},
+  -- open_on_setup        = false,
+  -- ignore_buffer_on_setup = false,
+  -- ignore_ft_on_setup   = {},
   --auto_close           = false,
   auto_reload_on_write = true,
   open_on_tab          = false,
@@ -260,7 +260,7 @@ require'nvim-tree'.setup {
         highlight_git = true,
       },
   respect_buf_cwd = true,
-      create_in_closed_folder = true,
+      -- create_in_closed_folder = true,
 }
 
 require'nvim-web-devicons'.setup {
@@ -333,7 +333,7 @@ local lspconfig = require('lspconfig')
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'sumneko_lua', 'rls', 'tsserver', 'vimls', 'kotlin_language_server' }
+local servers = { 'lua_ls', 'rls', 'tsserver', 'vimls', 'kotlin_language_server' }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -624,6 +624,10 @@ keymap.set('n', '<Leader>c8', '<Plug>lightline#bufferline#delete(8)')
 keymap.set('n', '<Leader>c9', '<Plug>lightline#bufferline#delete(9)')
 keymap.set('n', '<Leader>c0', '<Plug>lightline#bufferline#delete(10)')
 
+keymap.set('n', '<Leader>d1', '<cmd>diffget 1<cr>')
+keymap.set('n', '<Leader>d2', '<cmd>diffget 2<cr>')
+keymap.set('n', '<Leader>d3', '<cmd>diffget 3<cr>')
+
 --Find files using Telescope command-line sugar.
 keymap.set('n', '<leader>ff', '<cmd>Telescope find_files<cr>')
 keymap.set('n', '<leader>fg', '<cmd>Telescope live_grep<cr>')
@@ -709,10 +713,12 @@ keymap.set('n', '<leader>d', ':bd<CR>')
 keymap.set('n', '<leader>ql', ':call ToggleLocationList()<CR>')
 keymap.set('n', '<leader>qo', ':copen<CR>')
 keymap.set('n', '<leader>qc', ':close<CR>')
-keymap.set('n', '<leader>qn', ':cnext<CR>')
-keymap.set('n', '<A-Space>', ':cnext<CR>zz')
 keymap.set('n', '<leader>qN', ':cprevious<CR>')
 keymap.set('n', '<C-Space>', ':cprevious<CR>zz')
+keymap.set('n', '<A-h>', ':cprevious<CR>zz')
+keymap.set('n', '<leader>qn', ':cnext<CR>')
+keymap.set('n', '<A-Space>', ':cnext<CR>zz')
+keymap.set('n', '<A-l>', ':cnext<CR>zz')
 
 keymap.set('n', '<leader>gst', ':GoTestFunc<CR>')
 keymap.set('n', '<leader>gsd', ':execute \':GoDebugTest ./\' . expand("%:h") . \' -test.run=\' . go#util#TestName()<CR>')

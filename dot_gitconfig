@@ -1,12 +1,27 @@
 [mergetool]
 	keepBackup = false
-[user]
-	email = noris7012@gmail.com
-	name = noris7012
 [merge]
 	tool = nvimdiff
+    conflictstyle = diff3
 [pull]
 	ff = only
 
 [url "ssh://git@github.com/"]
 	insteadOf = https://github.com/
+
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    navigate = true    # use n and N to move between diff sections
+    light = false      # set to true if you're in a terminal w/ a light background color (e.g. the default macOS terminal)
+    side-by-side = true
+	; syntax-theme = GitHub
+
+[diff]
+	tool = nvimdiff
+    conflictstyle = diff3
+    colorMoved = default

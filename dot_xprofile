@@ -7,8 +7,9 @@ export TERMINAL=kitty
 xset b off
 xset b 0 0 0
 
-~/.fehbg &
+/* ~/.fehbg & */
+/* nitrogen --restore */
 
-picom -b
+/* picom -b */
 
 xmodmap ~/.Xmodmap
