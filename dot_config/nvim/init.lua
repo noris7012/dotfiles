@@ -757,5 +757,3 @@ vim.g.go_def_mapping_enabled = false
 
 vim.api.nvim_command('imap <silent><script><expr> <C-T> copilot#Accept("\\<CR>")')
 vim.g.copilot_no_tab_map = true
-
-

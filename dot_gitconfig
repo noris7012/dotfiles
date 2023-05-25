@@ -25,3 +25,9 @@
 	tool = nvimdiff
     conflictstyle = diff3
     colorMoved = default
+
+[push]
+	autoSetupRemote = true
+
+[alias]
+    commit-push = "!f() { git commit -m \"$1\" && git push; }; f"
