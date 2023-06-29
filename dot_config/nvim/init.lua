@@ -101,6 +101,7 @@ opt.smartindent = true
 opt.tabstop = 4
 opt.softtabstop = 4
 opt.shiftwidth = 4
+opt.paste = true
 --set expandtab
 
 vim.api.nvim_command('command -nargs=* Glg Git log --graph --oneline --decorate <args>')
@@ -333,7 +334,7 @@ local lspconfig = require('lspconfig')
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'lua_ls', 'rls', 'tsserver', 'vimls', 'kotlin_language_server' }
+local servers = { 'lua_ls', 'rls', 'tsserver', 'vimls', 'kotlin_language_server', 'pyright', 'terraformls' }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -757,3 +758,9 @@ vim.g.go_def_mapping_enabled = false
 
 vim.api.nvim_command('imap <silent><script><expr> <C-T> copilot#Accept("\\<CR>")')
 vim.g.copilot_no_tab_map = true
+-- vim.g.copilot_filetypes = { VimspectorPrompt = false }
+
+vim.cmd [[
+  command GCheckoutQuickfix execute 'G checkout' . ' ' . matchstr(getline('.'), '^[a-f0-9]\+') . ' -- ' . fnameescape(bufname('#'))
+]]
+keymap.set('n', 'gc', '<cmd>GCheckoutQuickfix<cr>', { silent = true })
