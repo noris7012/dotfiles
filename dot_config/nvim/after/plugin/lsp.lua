@@ -31,6 +31,11 @@ local on_attach = function(client, bufnr)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
   -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
   vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+
+  if client.name == "tsserver" then
+    -- set shiftwidth to 2
+    vim.cmd('setlocal shiftwidth=2')
+  end
 end
 
 -- Add additional capabilities supported by nvim-cmp
@@ -41,7 +46,7 @@ local lspconfig = require('lspconfig')
 
 -- Use a loop to conveniently call 'setup' on multiple servers and
 -- map buffer local keybindings when the language server attaches
-local servers = { 'lua_ls', 'rls', 'tsserver', 'vimls', 'kotlin_language_server', 'pyright', 'terraformls', 'graphql' }
+local servers = {'rls', 'tsserver', 'vimls', 'kotlin_language_server', 'pyright', 'terraformls', 'graphql' }
 for _, lsp in pairs(servers) do
   lspconfig[lsp].setup {
     on_attach = on_attach,
@@ -52,6 +57,33 @@ for _, lsp in pairs(servers) do
     capabilities = capabilities,
   }
 end
+
+lspconfig['lua_ls'].setup {
+  settings = {
+    Lua = {
+      runtime = {
+        -- Tell the language server which version of Lua you're using
+        -- (most likely LuaJIT in the case of Neovim)
+        version = 'LuaJIT',
+      },
+      diagnostics = {
+        -- Get the language server to recognize the `vim` global
+        globals = {
+          'vim',
+          'require'
+        },
+      },
+      workspace = {
+        -- Make the server aware of Neovim runtime files
+        library = vim.api.nvim_get_runtime_file("", true),
+      },
+      -- Do not send telemetry data containing a randomized but unique identifier
+      telemetry = {
+        enable = false,
+      },
+    },
+  },
+}
 
 lspconfig['gopls'].setup {
   on_attach = on_attach,

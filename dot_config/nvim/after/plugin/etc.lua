@@ -1,4 +1,4 @@
-local vim = vim 
+local vim = vim
 local keymap = vim.keymap
 
 keymap.set('n', '<leader>t', ':TagbarToggle<CR>')

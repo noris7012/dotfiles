@@ -2,7 +2,7 @@ export GTK_IM_MODULE=kime
 export QT_IM_MODULE=kime
 export XMODIFIERS=@im=kime
 export GLFW_IM_MODULE=ibus
-export TERMINAL=kitty
+/* export TERMINAL=kitty */
 
 xset b off
 xset b 0 0 0

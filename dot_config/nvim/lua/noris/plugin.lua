@@ -5,6 +5,7 @@ local Plug = vim.fn['plug#']
 vim.call('plug#begin', '~/.config/nvim/plugged')
 
  --Plug 'test/oliver-test'
+ Plug 'gabrielpoca/replacer.nvim'
 
  --Plug 'scrooloose/nerdtree'
  Plug 'nvim-tree/nvim-web-devicons' -- for file icons
@@ -25,7 +26,7 @@ vim.call('plug#begin', '~/.config/nvim/plugged')
  Plug 'sirver/ultisnips'
  Plug 'honza/vim-snippets'
  Plug 'quangnguyen30192/cmp-nvim-ultisnips'
- Plug 'pwntester/octo.nvim'
+ -- Plug 'pwntester/octo.nvim'
 
  Plug 'maxmellon/vim-jsx-pretty'
  --Plug 'joshdick/onedark.vim'

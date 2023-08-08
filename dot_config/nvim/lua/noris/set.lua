@@ -24,6 +24,6 @@ opt.smartindent = true
 opt.tabstop = 4
 opt.softtabstop = 4
 opt.shiftwidth = 4
---set expandtab
+opt.expandtab = true
 
 opt.compatible = false

@@ -72,7 +72,7 @@ ZSH_THEME="bullet-train"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(zsh-autosuggestions fzf)
+plugins=(zsh-autosuggestions fzf history)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -107,6 +107,7 @@ alias ta="tmux attach -t"
 alias v="nvim"
 alias g="nvim -c \"G | only\""
 alias gla="nvim -c \"Gla | only\""
+alias l="lazygit"
 
 function glg() {
 	if [ -n "$1" ]
@@ -150,3 +151,12 @@ export BULLETTRAIN_PROMPT_ORDER=(
   dir
   git
 )
+
+source ~/fzf-git.sh
+
+gco() {
+  local selected=$(_fzf_git_each_ref --no-multi)
+  [ -n "$selected" ] && git checkout "$selected"
+}
+
+export ANDROID_HOME=/home/noris/Android/Sdk

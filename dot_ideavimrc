@@ -1,11 +1,15 @@
 Plug 'preservim/nerdtree'
+Plug 'tpope/vim-surround'
 
 map gr <Action>(FindUsages)
 map <C-p> <Action>(GotoFile)
 map <S-A-[> <Action>(PreviousTab)
 map <S-A-]> <Action>(NextTab)
+map <S-A-m> <Action>(MoveEditorToOppositeTabGroup)
 map <Leader>rn <Action>(RenameElement)
 map <Leader>fg <Action>(FindInPath)
+map <A-h> <Action>(PreviousOccurence)
+map <A-l> <Action>(NextOccurence)
 
 map <C-n> :NERDTreeToggle<CR>
 

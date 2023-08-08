@@ -1,7 +1,10 @@
 [mergetool]
 	keepBackup = false
+	prompt = false
+[mergetool "nvim"]
+	cmd = nvim -f -c \"DiffviewOpen\"
 [merge]
-	tool = nvimdiff
+	tool = nvim
     conflictstyle = diff3
 [pull]
 	ff = only
@@ -31,3 +34,11 @@
 
 [alias]
     commit-push = "!f() { git commit -m \"$1\" && git push; }; f"
+    cop = "!f() { git commit -m \"$1\" && git push; }; f"
+    checkout-pull = "!f() { git checkout \"$1\" && git pull; }; f"
+    chp = "!f() { git checkout \"$1\" && git pull; }; f"
+    main = "!f() { git checkout main && git pull; }; f"
+    fork = "!f() { git checkout main && git pull && git checkout -b \"$1\"; }; f"
+    mergetool = "!nvim -c DiffviewOpen"
+    dt = "! args=$@; shift $#; nvim -c \"DiffviewOpen $args\""
+	mt = "mergetool"
