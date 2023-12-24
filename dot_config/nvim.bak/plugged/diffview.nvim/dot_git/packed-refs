@@ -1,0 +1,8 @@
+# pack-refs with: peeled fully-peeled sorted 
+f587965b8d23efe52c814d3b2a2cb8986783aa7f refs/remotes/origin/feat/inline-diff
+77401a87ab0ad95220fbfeb55a072d1a74f21658 refs/remotes/origin/feat/reflog-improvements
+24292023aba96a60b6ef2d7b6b94b5cdb703c9d1 refs/remotes/origin/feat/set-git-dir-env
+e91110d2a7f8e2f667666aba6ea089ff823f8748 refs/remotes/origin/main
+707946b67999750a9c85febc9a495035692b52d9 refs/remotes/origin/perf/single-job-history
+982cf57189fabd9c79b6fa10edd9001747b127d2 refs/remotes/origin/refactor/streams
+41cf09523c6a4d26db58276c9c732d0755be90e1 refs/remotes/origin/test/git-adapter

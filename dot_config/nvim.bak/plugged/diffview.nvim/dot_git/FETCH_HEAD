@@ -1,0 +1,7 @@
+500d8b2013812e05ab87db83a8d22319986519f2		branch 'main' of ssh://github.com/sindrets/diffview.nvim
+f587965b8d23efe52c814d3b2a2cb8986783aa7f	not-for-merge	branch 'feat/inline-diff' of ssh://github.com/sindrets/diffview.nvim
+77401a87ab0ad95220fbfeb55a072d1a74f21658	not-for-merge	branch 'feat/reflog-improvements' of ssh://github.com/sindrets/diffview.nvim
+24292023aba96a60b6ef2d7b6b94b5cdb703c9d1	not-for-merge	branch 'feat/set-git-dir-env' of ssh://github.com/sindrets/diffview.nvim
+707946b67999750a9c85febc9a495035692b52d9	not-for-merge	branch 'perf/single-job-history' of ssh://github.com/sindrets/diffview.nvim
+077b1c57dc4c605383f5a8baf532ac68912fe41b	not-for-merge	branch 'refactor/streams' of ssh://github.com/sindrets/diffview.nvim
+41cf09523c6a4d26db58276c9c732d0755be90e1	not-for-merge	branch 'test/git-adapter' of ssh://github.com/sindrets/diffview.nvim

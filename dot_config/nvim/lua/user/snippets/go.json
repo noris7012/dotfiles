@@ -1,0 +1,20 @@
+{
+  "iferr": {
+    "prefix": "iferr",
+    "body": [
+      "if err := $1; err != nil {",
+      "\treturn err",
+      "}"
+    ],
+    "description": "if err snip"
+  },
+  "reterr": {
+    "prefix": "reterr",
+    "body": [
+      "if err != nil {",
+      "\treturn err",
+      "}"
+    ],
+    "description": "return err snip"
+  }
+}

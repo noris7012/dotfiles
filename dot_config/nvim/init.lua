@@ -1,52 +1,23 @@
-require("noris")
+if vim.loader and vim.fn.has "nvim-0.9.1" == 1 then vim.loader.enable() end
 
-local vim = vim
-local keymap = vim.keymap
+for _, source in ipairs {
+  "astronvim.bootstrap",
+  "astronvim.options",
+  "astronvim.lazy",
+  "astronvim.autocmds",
+  "astronvim.mappings",
+} do
+  local status_ok, fault = pcall(require, source)
+  if not status_ok then vim.api.nvim_err_writeln("Failed to load " .. source .. "\n\n" .. fault) end
+end
 
-vim.g.lightline = {
-	   colorscheme = 'nightfox',
-       active = {
-         left = { { 'mode', 'paste' },
-                   { 'gitbranch', 'readonly', 'filename', 'modified', 'method' } }
-       },
-       tabline = {
-         left = { {'buffers'} },
-         right = { {} }
-       },
-       component_expand = {
-         buffers = 'lightline#bufferline#buffers'
-       },
-       component_type = {
-         buffers = 'tabsel'
-       },
-       component_function = {
-         gitbranch = 'gitbranch#name',
-         method = 'NearestmethodOrFunction'
-       },
-}
+if astronvim.default_colorscheme then
+  if not pcall(vim.cmd.colorscheme, astronvim.default_colorscheme) then
+    require("astronvim.utils").notify(
+      ("Error setting up colorscheme: `%s`"):format(astronvim.default_colorscheme),
+      vim.log.levels.ERROR
+    )
+  end
+end
 
-vim.g['lightline#bufferline#filename_modifier'] = ':t'
-vim.g['lightline#bufferline#show_number'] = 2
-
-keymap.set('n', '<Leader>b', ':call lightline#bufferline#go(input(\'buffer: \'))<CR>')
-keymap.set('n', '<Leader>1', '<Plug>lightline#bufferline#go(1)')
-keymap.set('n', '<Leader>2', '<Plug>lightline#bufferline#go(2)')
-keymap.set('n', '<Leader>3', '<Plug>lightline#bufferline#go(3)')
-keymap.set('n', '<Leader>4', '<Plug>lightline#bufferline#go(4)')
-keymap.set('n', '<Leader>5', '<Plug>lightline#bufferline#go(5)')
-keymap.set('n', '<Leader>6', '<Plug>lightline#bufferline#go(6)')
-keymap.set('n', '<Leader>7', '<Plug>lightline#bufferline#go(7)')
-keymap.set('n', '<Leader>8', '<Plug>lightline#bufferline#go(8)')
-keymap.set('n', '<Leader>9', '<Plug>lightline#bufferline#go(9)')
-keymap.set('n', '<Leader>0', '<Plug>lightline#bufferline#go(10)')
-
-keymap.set('n', '<Leader>c1', '<Plug>lightline#bufferline#delete(1)')
-keymap.set('n', '<Leader>c2', '<Plug>lightline#bufferline#delete(2)')
-keymap.set('n', '<Leader>c3', '<Plug>lightline#bufferline#delete(3)')
-keymap.set('n', '<Leader>c4', '<Plug>lightline#bufferline#delete(4)')
-keymap.set('n', '<Leader>c5', '<Plug>lightline#bufferline#delete(5)')
-keymap.set('n', '<Leader>c6', '<Plug>lightline#bufferline#delete(6)')
-keymap.set('n', '<Leader>c7', '<Plug>lightline#bufferline#delete(7)')
-keymap.set('n', '<Leader>c8', '<Plug>lightline#bufferline#delete(8)')
-keymap.set('n', '<Leader>c9', '<Plug>lightline#bufferline#delete(9)')
-keymap.set('n', '<Leader>c0', '<Plug>lightline#bufferline#delete(10)')
+require("astronvim.utils").conditional_func(astronvim.user_opts("polish", nil, false), true)
