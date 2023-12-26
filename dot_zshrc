@@ -143,8 +143,7 @@ export EDITOR='nvim'
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
-export PATH="/opt/homebrew/bin:$PATH"
-. /opt/asdf-vm/asdf.sh
+. "$HOME/.asdf/asdf.sh"
 
 export PATH="$(go env GOPATH)/bin:/Users/oliver/.local/share/solana/install/active_release/bin:$PATH"
 
